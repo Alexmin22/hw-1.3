@@ -148,4 +148,24 @@ public class Main {
         }
         return 9999;
     }
+
+    public int minSubArrayLen(int target, int[] nums) {
+        //Учитывая массив положительных целых чисел numsи положительное целое число target, вернуть минимальную
+        //длину подмассив сумма которых больше или равна target. Если такого подмассива нет, верните 0 вместо него.
+        int sum = 0;
+        int begin = 0;
+        int j = 0;
+        int res = Integer.MAX_VALUE;
+
+        while(j<nums.length) {
+            sum += nums[j];
+            while(sum >= target) {
+                    res = j-begin+1 > res ? res : j-begin+1;
+            sum -= nums[begin++];
+        }
+        j++;
+        }
+
+        return res == Integer.MAX_VALUE ? 0 : res;
+    }
 }
