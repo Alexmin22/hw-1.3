@@ -197,4 +197,37 @@ public class Main {
             }
             return false;
 }
+
+public int strStr(String haystack, String needle) {
+    //Given two strings needle and haystack, return the index of the first occurrence
+    //of needle in haystack, or -1 if needle is not part of haystack.
+        int count = 0;
+        int con = 0;
+        if(needle.length() >= haystack.length()) {
+            return needle.equals(haystack) ? 0 : -1;
+        }
+        
+        for(int i = 0; i< haystack.length(); i++) {
+            if(haystack.charAt(i) == needle.charAt(count)) {
+                if(i + needle.length() > haystack.length()) {
+                    return -1;
+                }
+                con = i;
+                while (true) {
+                    if(count > needle.length()-1 || haystack.charAt(i) != needle.charAt(count)) {
+                        break;
+                    } else if (count ==needle.length()-1) {
+                        return con;
+                    }
+                    
+                    count++;
+                    i++;
+                }
+                count = 0;
+                i = con;
+            }
+        }
+        return -1;
+    }
+    
 }
