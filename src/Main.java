@@ -229,5 +229,30 @@ public int strStr(String haystack, String needle) {
         }
         return -1;
     }
+
+public void moveZeroes(int[] nums) {
+    //Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+    //Note that you must do this in-place without making a copy of the array.
+        int zero = Integer.MAX_VALUE;
+        int nonzero = 0;
+        for(int i = 0; i<nums.length; i++) {
+            if(nums[i] == 0 && zero == Integer.MAX_VALUE) {
+                zero = i;
+            } else if(nums[i] != 0) {
+                if(zero < i) {
+                    nonzero = nums[i];
+                    nums[zero] = nonzero;
+                    nums[i] = 0;
+                    i = zero;
+                    zero = Integer.MAX_VALUE;
+                }
+            }
+        }
+    }
     
 }
+
+
+
+
+
