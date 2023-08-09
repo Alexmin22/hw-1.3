@@ -313,7 +313,18 @@ public boolean isSubsequence(String s, String t) {
         return -1;
     }
 
+//Учитывая неотрицательное целое число x, вернуть квадратный корень из xокругленного вниз до ближайшего целого числа .
+//Возвращаемое целое число также должно быть неотрицательным .
+    public int mySqrt(int x) {
+        if(x == 1 || x==2)return 1;
 
+        for(long i = 0; i<x; i++) {
+            if(i*i > x) {
+                return (int)--i;
+            }
+        }
+        return 0;
+    }
 
 
 
