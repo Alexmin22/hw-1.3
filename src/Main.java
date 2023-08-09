@@ -302,7 +302,16 @@ public boolean isSubsequence(String s, String t) {
         return false;
     }
 
-
+//Дан массив целых чисел nums, отсортированных в порядке возрастания, и целое число target, напишите функцию для поиска targetв nums.
+//Если targetсуществует, верните его индекс. В противном случае возвращайтесь -1.Вы должны написать алгоритм со O(log n)сложностью выполнения.
+    public int search(int[] nums, int target) {
+        for(int i = 0; i<nums.length; i++) {
+            if(nums[i]==target) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 
 
