@@ -326,7 +326,36 @@ public boolean isSubsequence(String s, String t) {
         return 0;
     }
 
+public int[] topKFrequent(int[] nums, int k) {
+    //Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.
+        Map<Integer, Integer> mapa = new HashMap<>();
 
+        for(int a : nums) {
+            if(mapa.containsKey(a)) {
+                mapa.replace(a, mapa.get(a)+1);
+            } else {
+                mapa.put(a, 1);
+            }
+        }
+        
+        int arr[] = new int[k];
+       int j = 0;
+
+        for(int i = 0; i<k; i++) {  
+            int val = 0;
+            int max = 0;    
+            for(Map.Entry<Integer,Integer> ent : mapa.entrySet()) {
+                if(ent.getValue() > val) {
+                    val = ent.getValue();
+                    max = ent.getKey();
+                }
+            }
+            mapa.put(max, 0);
+            arr[j] = max;
+            j++;
+    }
+    return arr;
+}
 
     
 }
