@@ -357,6 +357,31 @@ public int[] topKFrequent(int[] nums, int k) {
     return arr;
 }
 
+public int lengthOfLongestSubstring(String s) {
+    //Given a string s, find the length of the longest substring without repeating characters.
+        Set<Character> charSet = new HashSet<>();
+        int size = 0;
+        int max =0;
+        int count = -1;
+
+        if(s.length() == 1) {
+            return 1;
+        }
+
+        for(int i = 0; i< s.length(); i++) {
+            size = charSet.size();
+            charSet.add(s.charAt(i));
+            if(size == charSet.size()) {
+                count++;
+                max = charSet.size() > max ? charSet.size() : max;
+                charSet.clear();
+                i = count;
+            }
+        }
+        max = Math.max(charSet.size(), max);
+        return max;
+    }
+    
     
 }
 
