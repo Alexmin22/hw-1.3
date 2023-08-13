@@ -381,6 +381,35 @@ public int lengthOfLongestSubstring(String s) {
         max = Math.max(charSet.size(), max);
         return max;
     }
+
+
+//Имеется целочисленный массив nums, отсортированный в порядке возрастания (с различными значениями). Перед тем, как быть переданным вашей функции, 
+//numsон может быть повернут по неизвестному опорному индексу k( 1 <= k < nums.length), так что результирующий массив будет
+//[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]( 0-индексирован ). Например, [0,1,2,4,5,6,7]может быть повернут по опорному индексу 3и станет [4,5,6,7,0,1,2].
+//Учитывая массив nums после возможного поворота и целое число target, вернуть индекс, targetесли он находится в nums, или -1если он не находится вnums . Вы должны написать алгоритм со O(log n)сложностью выполнения.
+public int search(int[] nums, int target) {
+        int k = nums[0] > nums[nums.length-1] ? nums[0] : 0;
+        int res = -1;
+
+        if(target >= k) {
+            for(int i = 0; i< nums.length; i++) {
+                if(target == nums[i]) {
+                    return i;
+                } else if(nums[i] > target) {
+                    return res;
+                }
+            }
+        } else {
+            for(int i = nums.length-1; i> 0; i--) {
+                if(target == nums[i]) {
+                    return i;
+                } else if(nums[i] < target) {
+                    return res;
+                }
+            }
+        }
+        return res;
+}
     
     
 }
