@@ -410,7 +410,25 @@ public int search(int[] nums, int target) {
         }
         return res;
 }
-    
+
+//Получив 32-битное целое число со знаком x, верните xего цифры в обратном порядке.
+//Если реверсирование xприводит к тому, что значение выходит за пределы диапазона 32-разрядных целых чисел со знаком , то возвращается значение 0.
+    public int reverse(int x) {
+        StringBuilder sb = new StringBuilder(Integer.toString(x));
+        sb.reverse();
+
+        if (x<0) {
+            sb.deleteCharAt(sb.length()-1);
+        }
+
+        long l = x >= 0 ? Long.parseLong(sb.toString()) : Long.parseLong(sb.toString()) - (Long.parseLong(sb.toString())*2);
+
+        if (l > Integer.MAX_VALUE || l< Integer.MIN_VALUE) {
+            return 0;
+        }
+
+        return (int) l;
+    }
     
 }
 
