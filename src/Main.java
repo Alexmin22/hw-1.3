@@ -429,6 +429,56 @@ public int search(int[] nums, int target) {
 
         return (int) l;
     }
+
+//Имеется целочисленный массив nums, отсортированный в неубывающем порядке (не обязательно с различными значениями). Перед тем, как быть переданным 
+//вашей функции, numsон вращается по неизвестному опорному индексу k( 0 <= k < nums.length), так что результирующий массив [nums[k], nums[k+1], ..., 
+//nums[n-1], nums[0], nums[1], ..., nums[k-1]]( 0-индексированный ). Например, [0,1,2,4,4,4,5,6,6,7]может быть повернут по опорному
+//индексу 5и станет [4,5,6,6,7,0,1,2,4,4].Учитывая массив nums после поворота и целое число target, вернуть , trueесли targetон находится в nums
+//или falseесли он не находится в nums.
+public boolean search(int[] nums, int target) {
+        if(target >= nums[0]) {
+            for(int i = 0; i< nums.length; i++) {
+                if(i > 0 && nums[i] < nums[i-1]) {
+                    return false;
+                } else if(target == nums[i]) {
+                    return true;
+                }
+            }
+        } else {
+            for(int i = nums.length-1; i > -1; i--) {
+                if(i < nums.length-1 && nums[i] > nums[i+1]) {
+                    return false;
+                } else if(target == nums[i]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+//Учитывая целочисленный массив numsи целое число k, вернуть наибольший элемент в массиве .kth БЕЗ СОРТИРОВКИ!
+//Обратите внимание, что это самый большой элемент в отсортированном порядке, а не отдельный элемент.kth kth
+public int findKthLargest(int[] nums, int k) {
+        Map<Integer, Integer> mapa = new HashMap<>();
+            int max = Integer.MIN_VALUE;
+
+            for(int i = 0; i< nums.length; i++) {
+                if(mapa.containsKey(nums[i])) {
+                    mapa.put(nums[i], mapa.get(nums[i])+1);
+                } else {
+                    mapa.put(nums[i], 1);
+                }
+            }
+
+            while (k>0) {
+                max = Integer.MIN_VALUE;
+                for (Map.Entry<Integer, Integer> entry : mapa.entrySet()) {
+                    max = Math.max(max, entry.getKey());
+                }
+                k -= mapa.get(max);
+                mapa.remove(max);
+            }
+            return max;
+}
     
 }
 
