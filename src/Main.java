@@ -479,6 +479,42 @@ public int findKthLargest(int[] nums, int k) {
             }
             return max;
 }
+//Массив arrявляется горой , если выполняются следующие свойства: arr.length >= 3 Существуют некоторые iс 0 < i < arr.length - 1таким, что:
+//arr[0] < arr[1] < ... < arr[i - 1] < arr[i], arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
+//Учитывая горный массив arr, вернуть индекс iтаким образом, что arr[0] < arr[1] < ... < arr[i - 1] < arr[i] > arr[i + 1] > ... > arr[arr.length - 1].
+//Вы должны решить его по O(log(arr.length))временной сложности.
+    public int peakIndexInMountainArray(int[] arr) {
+        int mid = (arr.length)/2;
+        int start = arr[mid] <= arr[mid+1] ? mid : 0;
+        int end = start > 0 ? arr.length : mid+1;
+        for(int i = start; i<end; i++) {
+            if(arr[i]> arr[i+1]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+//Учитывая несортированный массив целых чисел nums, вернуть длину самой длинной последовательности последовательных элементов.
+//Вы должны написать алгоритм, работающий во  O(n) времени.
+    public int longestConsecutive(int[] nums) {
+        Arrays.sort(nums);
+        int max = Integer.MIN_VALUE;
+        int count = 0;
+
+        for(int i = 0; i < nums.length; i++) {
+            count++;
+            if(i < nums.length-1 && nums[i]+1 != nums[i+1]) {
+                if(nums[i] == nums[i+1]) {
+                    count--;
+                    continue;
+                }
+                max = Math.max(max, count);
+                count = 0;
+            }
+        }
+        return Math.max(max, count);
+    }
     
 }
 
