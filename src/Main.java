@@ -515,7 +515,105 @@ public int findKthLargest(int[] nums, int k) {
         }
         return Math.max(max, count);
     }
-    
+
+//Given a string s consisting of words and spaces, return the length of the last word in the string.
+//A word is a maximal substring consisting of non-space characters only.
+public int lengthOfLastWord(String s) {
+        s = s.trim();
+
+        for(int i = s.length()-1; i>-1; i--) {
+            if(s.charAt(i) == ' ') {
+                return s.length()-1 - i;
+            }
+        }
+        return s.length();
+    }
+
+//A country is big if:
+//it has an area of at least three million (i.e., 3000000 km2), or
+//it has a population of at least twenty-five million (i.e., 25000000).
+//Write a solution to find the name, population, and area of the big countries. Return the result table in any order. 
+//The result format is in the following example.
+    SELECT name, population, area 
+    FROM world
+    WHERE area >= 3000000 OR population >= 25000000;
+
+//You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. 
+//If a string is longer than the other, append the additional letters onto the end of the merged string. Return the merged string.
+    public String mergeAlternately(String word1, String word2) {
+
+        int len = Math.max(word1.length(), word2.length());
+
+        StringBuilder sb = new StringBuilder(len);
+
+        for(int i = 0; i < len; i++) {
+            if(i<word1.length()) {
+                sb.append(word1.charAt(i));
+            }
+             if(i<word2.length()) {
+                sb.append(word2.charAt(i));
+            }
+        }
+
+    return sb.toString();
+        
+    }
+
+    //Учитывая массив nums, содержащий nразличные числа в диапазоне [0, n], верните единственное число в диапазоне, отсутствующее в массиве.
+    public int missingNumber(int[] nums) {
+        Arrays.sort(nums);
+
+        if(nums.length == 1) return nums[0] == 0 ? 1 : 0;
+
+        for(int i = 1; i< nums.length; i++) {
+            if(nums[i] != nums[i-1]+1) {
+                return i;
+            }
+        }
+
+        return nums[0] == 0 ? nums.length : 0;
+    }
+
+    //Write a solution to find the ids of products that are both low fat and recyclable. Return the result table in any order. 
+    //The result format is in the following example.
+    SELECT product_id
+    FROM products
+    WHERE low_fats = 'Y' AND recyclable = 'Y';
+
+
+//Учитывая непустой  массив целых чисел nums, каждый элемент появляется дважды , кроме одного. Найдите этого единственного.
+//Вы должны реализовать решение с линейной сложностью времени выполнения и использовать только постоянное дополнительное пространство.
+    public int singleNumber(int[] nums) {
+        Arrays.sort(nums);
+
+        for(int i = 1; i< nums.length; i++) {
+            if(nums[i] != nums[i-1]) {
+                return nums[i-1];
+            }
+            i++;
+        }
+        return nums[nums.length-1];
+    }
+
+//Числа Фибоначчи , обычно обозначаемые, F(n)образуют последовательность, называемую последовательностью Фибоначчи , 
+//так что каждое число представляет собой сумму двух предыдущих, начиная с 0и 1. Учитывая n, посчитайте F(n).
+    public int fib(int n) {
+
+        if(n<2) return n;
+
+        int a = 0;
+        int b = 1;
+        int c = 0;
+
+        for(int i = 2; i<=n; i++) {
+        c = a+b;
+        a=b;
+        b=c;
+        }
+
+return c;
+        
+    }
 }
 
 
