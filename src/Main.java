@@ -614,6 +614,79 @@ public int lengthOfLastWord(String s) {
 return c;
         
     }
+
+//There are n employees in a company, numbered from 0 to n - 1. Each employee i has worked for hours[i] hours in the company.
+//The company requires each employee to work for at least target hours.
+//You are given a 0-indexed array of non-negative integers hours of length n and a non-negative integer target.
+//Return the integer denoting the number of employees who worked at least target hours.
+    public int numberOfEmployeesWhoMetTarget(int[] hours, int target) {
+        Arrays.sort(hours);
+
+        int mid = hours.length/2;
+        int start = hours[mid] >= target ? 0 : mid;
+        int end = start == 0 ? mid : hours.length-1;
+
+        for(int i = start; i <= end; i++) {
+            if(hours[i] >= target) {
+                return hours.length - i;
+            }
+        }
+        return 0;
+    }
+
+//Write a solution to find all the authors that viewed at least one of their own articles.
+//Return the result table sorted by id in ascending order.
+SELECT distinct author_id AS id
+FROM Views
+WHERE author_id = viewer_id
+ORDER BY id;
+
+//Given two strings s and t, determine if they are isomorphic. Two strings s and t are isomorphic if the characters in s can be replaced to get t.
+//All occurrences of a character must be replaced with another character while preserving the order of characters. 
+//No two characters may map to the same character, but a character may map to itself.
+public boolean isIsomorphic(String s, String t) {
+        if(s.length() != t.length()) {
+            return false;
+        }
+
+        Map<Character, Character> mapa = new HashMap<>();
+        char[] tc = t.toCharArray();
+        char[] sc = s.toCharArray();
+        Set<Character> list = new HashSet<>();
+
+        for(int i = 0; i < t.length(); i++) {
+            if(mapa.containsKey(sc[i])) {
+                if(mapa.get(sc[i]) != tc[i]) {
+                    return false;
+                }
+            } else if (list.contains(tc[i])) {
+                if(!mapa.containsKey(sc[i]) || mapa.get(sc[i]) != tc[i]) {
+                    return false;
+                }
+            }
+            mapa.put(sc[i], tc[i]);
+            list.add(tc[i]);
+        }
+        return true;
+    }
+
+//Initially, you have a bank account balance of 100 dollars. You are given an integer purchaseAmount representing the amount you will spend on a 
+//purchase in dollars. At the store where you will make the purchase, the purchase amount is rounded to the nearest multiple of 10. 
+//In other words, you pay a non-negative amount, roundedAmount, such that roundedAmount is a multiple of 10 and abs(roundedAmount - purchaseAmount) is minimized.
+//If there is more than one nearest multiple of 10, the largest multiple is chosen.
+//Return an integer denoting your account balance after making a purchase worth purchaseAmount dollars from the store.
+    public int accountBalanceAfterPurchase(int purchaseAmount) {
+        
+    char[] charr = Integer.toString(purchaseAmount).toCharArray();
+
+   int a = Integer.parseInt(String.valueOf(charr[charr.length -1]));
+
+        if(a > 4) {
+            return 100 - (10 - a) - purchaseAmount;
+        } else {
+            return 100 - purchaseAmount + a;
+        }
+    }
 }
 
 
