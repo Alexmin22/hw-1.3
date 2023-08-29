@@ -687,6 +687,34 @@ public boolean isIsomorphic(String s, String t) {
             return 100 - purchaseAmount + a;
         }
     }
+
+//Учитывая две двоичные строки aи b, верните их сумму в виде двоичной строки . Не использовать методы Integer & Long
+    public String addBinary(String a, String b) {
+        if(a.equals("0") && b.equals("0")) return "0";
+        char[] d = a.toCharArray();
+        char[] e = b.toCharArray();
+        long f = 0;
+        long g = 0;
+        int count = d.length-1;
+
+        for(int i = 0; i< d.length; i++) {
+            f += Long.parseLong(String.valueOf(d[i])) == 0 ? 0 : Math.pow(2, count);
+            count--;
+        }
+        count = e.length-1;
+        for(int i = 0; i< e.length; i++) {
+            g += Long.parseLong(String.valueOf(e[i])) == 0 ? 0 : Math.pow(2, count);
+            count--;
+        }
+        long c = f+g;
+        StringBuilder sb = new StringBuilder();
+        while(c > 0) {
+            sb.append(c%2);
+            c/=2;
+        }
+
+        return sb.reverse().toString();
+    }
 }
 
 
