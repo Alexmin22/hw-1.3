@@ -729,6 +729,21 @@ public boolean isIsomorphic(String s, String t) {
 
         return res;
     }
+
+    //Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.
+    public String convertToTitle(int columnNumber) {
+        StringBuilder sb = new StringBuilder();
+        int cicle = 26;
+        
+        while(columnNumber > 0) {
+            columnNumber--;
+            char c = (char)('A' + columnNumber %26);
+            
+            sb.insert(0, c);
+            columnNumber /= cicle;
+        }
+        return sb.toString();
+    }
 }
 
 
