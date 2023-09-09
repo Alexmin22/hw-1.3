@@ -744,6 +744,37 @@ public boolean isIsomorphic(String s, String t) {
         }
         return sb.toString();
     }
+    
+//https://leetcode.com/problems/minimum-penalty-for-a-shop/description/
+    public int bestClosingTime(String customers) {
+        int open = 0;
+        int minPen = 0;
+        int preBest = Integer.MIN_VALUE;
+        int best = Integer.MIN_VALUE;
+
+        for(int i = 0; i< customers.length(); i++) {
+            if(customers.charAt(i) == 'Y') {
+                continue;
+            } else if(customers.charAt(i) == 'N') {
+                open--;
+            }
+        }
+
+        minPen = open;
+
+            for(int i = customers.length()-1; i>-1; i--) {
+            if(customers.charAt(i) == 'Y') {
+                minPen--;
+            } else if(customers.charAt(i) == 'N') {
+                minPen++;
+            }
+            if(minPen >= open && minPen >= preBest) {
+                preBest = minPen;
+                best = i;
+            }
+            }
+           return best == Integer.MIN_VALUE ? customers.length() : best;
+    }
 }
 
 
