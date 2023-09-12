@@ -775,6 +775,26 @@ public boolean isIsomorphic(String s, String t) {
             }
            return best == Integer.MIN_VALUE ? customers.length() : best;
     }
+    
+//https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/
+    public int findMin(int[] nums) {
+
+        if(nums[0]> nums[nums.length-1]) {
+            int mid = nums.length/2;
+            int start = nums[mid] < nums[0] ? 0 : mid;
+            int end = start == 0 ? mid : nums.length-1;
+            int cur = nums[start];
+
+            for(int i = start+1; i<=end; i++) {
+                if(nums[i]< cur) {
+                    return nums[i];
+                }
+        }
+        } else {
+            return nums[0];
+        }
+        return nums[nums.length-1];
+    }
 }
 
 
