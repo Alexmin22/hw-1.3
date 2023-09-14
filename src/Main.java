@@ -807,6 +807,22 @@ public boolean isIsomorphic(String s, String t) {
         }
         return nums[nums.length-1];
     }
+    
+//https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
+    public int[] twoSum(int[] numbers, int target) {
+        int cur = 0;
+        while(cur<numbers.length) {
+        for(int i = cur+1; i< numbers.length; i++) {
+            if(numbers[cur] + numbers[i] > target) {
+                break;
+            } else if(numbers[cur] + numbers[i] == target) {
+                return new int[]{++cur, ++i};
+            }
+        }
+        cur++;
+        }
+        return new int[]{0, 0};
+    }
 }
 
 
